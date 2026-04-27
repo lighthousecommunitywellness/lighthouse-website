@@ -1688,7 +1688,7 @@
           </div>
           <div class="schedule-meta-row">
             <span class="schedule-meta-label">Time</span>
-            <span class="schedule-meta-value">4:00 – 5:15pm</span>
+            <span class="schedule-meta-value">4:00 – 5:00pm</span>
           </div>
           <div class="schedule-meta-row">
             <span class="schedule-meta-label">Venue</span>
@@ -1706,8 +1706,8 @@
         <div class="class-row next">
           <div class="class-date">
             <span class="class-date-day">Sat</span>
-            <span class="class-date-num">04</span>
-            <span class="class-date-month">July</span>
+            <span class="class-date-num">20</span>
+            <span class="class-date-month">June</span>
           </div>
           <div class="class-content">
             <h4>Our first class — arriving</h4>
@@ -1715,15 +1715,15 @@
           </div>
           <div class="class-time">
             <span class="class-time-hour">4:00pm</span>
-            <span class="class-time-note">75 min</span>
+            <span class="class-time-note">60 min</span>
           </div>
-          <button class="class-book" data-book data-class-date="Sat 4 July" data-class-theme="Our first class — arriving">Book this class</button>
+          <button class="class-book" data-book data-class-date="Sat 20 June" data-class-theme="Our first class — arriving">Book this class</button>
         </div>
 
         <div class="class-row">
           <div class="class-date">
             <span class="class-date-day">Sat</span>
-            <span class="class-date-num">18</span>
+            <span class="class-date-num">04</span>
             <span class="class-date-month">July</span>
           </div>
           <div class="class-content">
@@ -1732,60 +1732,9 @@
           </div>
           <div class="class-time">
             <span class="class-time-hour">4:00pm</span>
-            <span class="class-time-note">75 min</span>
+            <span class="class-time-note">60 min</span>
           </div>
-          <button class="class-book" data-book data-class-date="Sat 18 July">Book this class</button>
-        </div>
-
-        <div class="class-row">
-          <div class="class-date">
-            <span class="class-date-day">Sat</span>
-            <span class="class-date-num">01</span>
-            <span class="class-date-month">August</span>
-          </div>
-          <div class="class-content">
-            <h4 class="tbd">Theme to be announced</h4>
-            <p>The fortnight's focus will be posted by the Wednesday before. Follow us locally or check back here.</p>
-          </div>
-          <div class="class-time">
-            <span class="class-time-hour">4:00pm</span>
-            <span class="class-time-note">75 min</span>
-          </div>
-          <button class="class-book" data-book data-class-date="Sat 1 August">Book this class</button>
-        </div>
-
-        <div class="class-row">
-          <div class="class-date">
-            <span class="class-date-day">Sat</span>
-            <span class="class-date-num">15</span>
-            <span class="class-date-month">August</span>
-          </div>
-          <div class="class-content">
-            <h4 class="tbd">Theme to be announced</h4>
-            <p>The fortnight's focus will be posted by the Wednesday before. Follow us locally or check back here.</p>
-          </div>
-          <div class="class-time">
-            <span class="class-time-hour">4:00pm</span>
-            <span class="class-time-note">75 min</span>
-          </div>
-          <button class="class-book" data-book data-class-date="Sat 15 August">Book this class</button>
-        </div>
-
-        <div class="class-row">
-          <div class="class-date">
-            <span class="class-date-day">Sat</span>
-            <span class="class-date-num">29</span>
-            <span class="class-date-month">August</span>
-          </div>
-          <div class="class-content">
-            <h4 class="tbd">Theme to be announced</h4>
-            <p>The fortnight's focus will be posted by the Wednesday before. Follow us locally or check back here.</p>
-          </div>
-          <div class="class-time">
-            <span class="class-time-hour">4:00pm</span>
-            <span class="class-time-note">75 min</span>
-          </div>
-          <button class="class-book" data-book data-class-date="Sat 29 August">Book this class</button>
+          <button class="class-book" data-book data-class-date="Sat 4 July">Book this class</button>
         </div>
 
       </div>
@@ -2245,7 +2194,7 @@
 
       <div class="modal-class-card" id="modalClassCard">
         <strong>Your class</strong>
-        <span id="modalClassDetails">Saturday · 4:00pm · 75 minutes</span>
+        <span id="modalClassDetails">Saturday · 4:00pm · 60 minutes</span>
       </div>
 
       <form id="bookingForm">
@@ -2391,7 +2340,7 @@
     modalForm.style.display = '';
     modalSuccess.style.display = 'none';
     bookingForm.reset();
-    modalClassDetails.textContent = details || 'Next Saturday · 4:00pm · 75 minutes';
+    modalClassDetails.textContent = details || 'Next Saturday · 4:00pm · 60 minutes';
     bookingModal.classList.add('open');
     document.body.style.overflow = 'hidden';
     setTimeout(() => document.getElementById('bookName').focus(), 300);
@@ -2408,9 +2357,9 @@
       e.preventDefault();
       const classDate = bookTrigger.dataset.classDate;
       const classTheme = bookTrigger.dataset.classTheme;
-      let details = 'Next Saturday · 4:00pm · 75 minutes';
+      let details = 'Next Saturday · 4:00pm · 60 minutes';
       if (classDate){
-        details = `${classDate} · 4:00pm · 75 minutes`;
+        details = `${classDate} · 4:00pm · 60 minutes`;
         if (classTheme){
           details += ` — ${classTheme}`;
         }
