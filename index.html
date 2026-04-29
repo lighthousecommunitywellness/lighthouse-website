@@ -1668,6 +1668,7 @@
     <a data-page="about">About</a>
     <a data-scroll="schedule">Classes</a>
     <a data-page="support">Support</a>
+    <a class="nav-book" data-eventbrite data-event-id="1988451114812">Book a class</a>
     <a class="nav-cta" data-page="donate">Donate</a>
   </div>
 </nav>
@@ -1683,8 +1684,8 @@
         <h1 class="hero-headline">A steady light, <em>a soft landing.</em></h1>
         <p class="hero-sub">Lighthouse Community Wellness is a donation-based yoga and mindfulness initiative built to remove cost, intimidation, and gatekeeping from mental-health support. Fortnightly community classes. Pay what you can. Everyone welcome.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" data-scroll="schedule">See upcoming classes</a>
-          <a class="btn btn-secondary" data-page="about">Our story</a>
+          <a class="btn btn-primary" data-eventbrite data-event-id="1988451114812">Reserve your mat — 13 June</a>
+          <a class="btn btn-secondary" data-scroll="schedule">See upcoming classes</a>
         </div>
       </div>
 
@@ -1837,7 +1838,7 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <span class="class-soon">Coming soon</span>
+        <button class="class-book" data-eventbrite data-event-id="1988451114812">Reserve your mat</button>
       </div>
 
       <!-- 27 June -->
@@ -1855,7 +1856,7 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <span class="class-soon">Coming soon</span>
+        <span class="class-soon">Bookings open 20 June</span>
       </div>
 
       <!-- 11 July -->
@@ -1873,11 +1874,12 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <span class="class-soon">Coming soon</span>
+        <span class="class-soon">Bookings open 4 July</span>
       </div>
 
       <div class="schedule-footer">
-        <p><strong>First time?</strong> Once classes open for booking, just arrive 10 minutes early, bring your own mat, water, and something you can move in. We'll take care of the rest.</p>
+        <p><strong>First time?</strong> Arrive 10 minutes early, bring your own mat, water, and something you can move in. We'll take care of the rest.</p>
+        <a class="btn btn-secondary" data-eventbrite data-event-id="1988451114812">Reserve your mat — 13 June</a>
       </div>
     </div>
   </section>
@@ -2285,57 +2287,28 @@
   </div>
 </footer>
 
-<!-- ============== BOOKING MODAL ============== -->
+<!-- ============== EVENTBRITE WIDGET ==============
+     Per-class event IDs are set on each button via data-event-id="...".
+     To activate a class for booking, just add data-event-id="THE_NUMERIC_ID"
+     to its button — find the ID in the Eventbrite event URL.
+
+     Example URL: https://www.eventbrite.com.au/e/1988451114812?aff=...
+     The ID is: 1988451114812
+     ============================================== -->
+<script src="https://www.eventbrite.com/static/widgets/eb_widgets.js"></script>
+
+<!-- Hidden trigger button that the Eventbrite widget binds to -->
+<button id="eventbriteTrigger" style="display:none;">Reserve your mat</button>
+
+<!-- Fallback modal — shown when a class isn't yet open for bookings -->
 <div class="modal-overlay" id="bookModal">
   <div class="modal">
     <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-
-    <div id="modalForm">
-      <div class="section-eyebrow">Book a class</div>
-      <h3>Save your <em>spot</em>.</h3>
-      <p class="modal-sub">Your spot at Saturday's class is held for you. Bring your own mat — and pay what you can on the day, no payment in advance.</p>
-
-      <div class="modal-class-info">
-        <strong>Your class</strong>
-        <span id="modalClassDate">Saturday · 4:00pm · 60 minutes</span>
-      </div>
-
-      <form id="bookForm">
-        <div class="form-row">
-          <label for="bookName">Your name</label>
-          <input type="text" id="bookName" required>
-        </div>
-        <div class="form-row">
-          <label for="bookEmail">Email</label>
-          <input type="email" id="bookEmail" required>
-        </div>
-        <div class="form-row">
-          <label for="bookPhone">Phone (optional)</label>
-          <input type="tel" id="bookPhone">
-        </div>
-        <div class="form-row">
-          <label for="bookExp">Experience with yoga</label>
-          <select id="bookExp">
-            <option>First time — brand new</option>
-            <option>Been a while, easing back in</option>
-            <option>Practise occasionally</option>
-            <option>Regular practice</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label for="bookNotes">Anything we should know? (optional)</label>
-          <textarea id="bookNotes" placeholder="Injuries, anxieties, anything that helps us welcome you well."></textarea>
-        </div>
-        <button type="submit" class="modal-submit">Confirm booking</button>
-        <p class="modal-disclaimer">You'll receive a confirmation email within 24 hours. No spam, ever.</p>
-      </form>
-    </div>
-
-    <div class="modal-success" id="modalSuccess">
-      <div class="section-eyebrow">You're in</div>
-      <h3>Your spot is <em>held</em>.</h3>
-      <p>We'll send a confirmation email shortly with the venue address and a reminder to bring your own mat. See you Saturday.</p>
-    </div>
+    <div class="section-eyebrow">Booking</div>
+    <h3>Bookings opening <em>soon</em>.</h3>
+    <p class="modal-sub">This class isn't open for booking yet — we release each session about a week before the date. In the meantime, send us a quick hello and we'll let you know the moment it goes live.</p>
+    <a href="mailto:lighthousecommunitywellness@gmail.com?subject=Let%20me%20know%20when%20bookings%20open" class="modal-submit" style="display: block; text-align: center; text-decoration: none;">Email us to be notified</a>
+    <p class="modal-disclaimer">We'll reply within 24 hours.</p>
   </div>
 </div>
 
@@ -2353,11 +2326,11 @@
   }
 
   document.addEventListener('click', (e) => {
-    // booking takes priority
-    const bookTarget = e.target.closest('[data-book]');
-    if (bookTarget) {
+    // Eventbrite booking takes priority
+    const ebTarget = e.target.closest('[data-eventbrite]');
+    if (ebTarget) {
       e.preventDefault();
-      openBookingModal(bookTarget);
+      openBooking(ebTarget.dataset.eventId);
       return;
     }
     // scroll-on-page
@@ -2387,24 +2360,51 @@
     document.getElementById('navLinks').classList.toggle('open');
   });
 
-  // ============== BOOKING MODAL ==============
+  // ============== BOOKING (Eventbrite + fallback) ==============
   const bookModal = document.getElementById('bookModal');
-  const modalForm = document.getElementById('modalForm');
-  const modalSuccess = document.getElementById('modalSuccess');
-  const modalClassDate = document.getElementById('modalClassDate');
+  const ebTrigger = document.getElementById('eventbriteTrigger');
+  const initialisedEvents = new Set();
 
-  function openBookingModal(triggerEl) {
-    const date = triggerEl?.dataset.classDate;
-    const theme = triggerEl?.dataset.classTheme;
-    if (date && theme) {
-      modalClassDate.textContent = `${date} · 4:00pm · 60 minutes — ${theme}`;
+  function initEventbriteWidget(eventId) {
+    if (initialisedEvents.has(eventId)) return;
+    if (typeof window.EBWidgets === 'undefined') return;
+
+    window.EBWidgets.createWidget({
+      widgetType: 'checkout',
+      eventId: eventId,
+      modal: true,
+      modalTriggerElementId: 'eventbriteTrigger',
+      onOrderComplete: function() {
+        console.log('Booking completed for event ' + eventId);
+      }
+    });
+
+    initialisedEvents.add(eventId);
+  }
+
+  function openBooking(eventId) {
+    if (eventId) {
+      // Re-bind the hidden trigger for this specific event
+      // (Eventbrite's widget binds to the trigger; we need a fresh widget per event)
+      window.EBWidgets.createWidget({
+        widgetType: 'checkout',
+        eventId: eventId,
+        modal: true,
+        modalTriggerElementId: 'eventbriteTrigger',
+        onOrderComplete: function() {
+          console.log('Booking completed for event ' + eventId);
+        }
+      });
+      // Trigger the click after a brief delay to let widget bind
+      setTimeout(() => {
+        if (ebTrigger) ebTrigger.click();
+      }, 50);
     } else {
-      modalClassDate.textContent = `Saturday · 4:00pm · 60 minutes`;
+      // No event ID = class not yet open for booking
+      bookModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-    modalForm.style.display = 'block';
-    modalSuccess.classList.remove('active');
-    bookModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    document.getElementById('navLinks').classList.remove('open');
   }
 
   function closeBookingModal() {
@@ -2415,13 +2415,6 @@
   document.getElementById('modalClose').addEventListener('click', closeBookingModal);
   bookModal.addEventListener('click', (e) => {
     if (e.target === bookModal) closeBookingModal();
-  });
-
-  document.getElementById('bookForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    // TODO: replace with real submission (Formspree, Netlify Forms, etc.)
-    modalForm.style.display = 'none';
-    modalSuccess.classList.add('active');
   });
 
   // ============== DONATION ==============
