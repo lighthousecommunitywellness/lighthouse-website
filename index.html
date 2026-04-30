@@ -770,6 +770,137 @@
   .notify-form-wrap.is-success .notify-success { display: block; }
   .notify-form-wrap.is-success .notify-form-intro { display: none; }
 
+  /* ===== Mailing-list block (simple, mailto-based) ===== */
+  .mailing-list-block {
+    grid-column: 1 / -1;
+    margin-top: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    background: var(--cream);
+    border-radius: 4px;
+    border: 1px solid rgba(138, 158, 138, 0.22);
+    text-align: left;
+  }
+  .mailing-list-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    margin: 0 0 1.2rem 0;
+    max-width: 56ch;
+    line-height: 1.45;
+  }
+  .mailing-list-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    border: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .mailing-list-btn:hover {
+    background: var(--charcoal);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    color: var(--cream);
+  }
+  .mailing-list-btn svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .mailing-list-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--warm-grey);
+    margin: 0.8rem 0 0 0;
+    font-style: italic;
+  }
+
+  /* ===== Stay in the loop band (above footer) ===== */
+  .loop-band {
+    background: var(--sage-pale);
+    padding: 5rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(138, 158, 138, 0.15);
+  }
+  .loop-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .loop-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+  }
+  .loop-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    line-height: 1.2;
+    color: var(--charcoal);
+    margin: 0 0 1.2rem 0;
+  }
+  .loop-title em {
+    font-style: italic;
+    color: var(--sage-deep);
+  }
+  .loop-lead {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--charcoal);
+    line-height: 1.65;
+    max-width: 52ch;
+    margin: 0 auto 2rem auto;
+    opacity: 0.85;
+  }
+  .loop-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 2rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    border: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .loop-btn:hover {
+    background: var(--charcoal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    color: var(--cream);
+  }
+  .loop-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--warm-grey);
+    margin: 1.2rem 0 0 0;
+    font-style: italic;
+  }
+  @media (max-width: 600px) {
+    .loop-band { padding: 3.5rem 1.2rem; }
+  }
+
   /* Bespoke notify form — submits silently to Google Forms */
   .notify-form {
     display: flex;
@@ -2052,40 +2183,13 @@
         </div>
         <button class="class-book" data-eventbrite data-event-id="1988451114812" hidden>Reserve your mat</button>
         <button class="class-soon" type="button" aria-expanded="false">Bookings open soon</button>
-        <div class="notify-form-wrap">
-          <p class="notify-form-intro">Pop your details in and we'll let you know the moment bookings open. No spam — just one message when bookings go live.</p>
-          <form class="notify-form" id="notifyForm">
-            <div class="notify-row">
-              <div class="notify-field">
-                <label for="notify-name">Your name <span class="notify-req">*</span></label>
-                <input type="text" id="notify-name" name="entry.2050659417" required autocomplete="name">
-              </div>
-              <div class="notify-field">
-                <label for="notify-email">Email <span class="notify-req">*</span></label>
-                <input type="email" id="notify-email" name="entry.1526853613" required autocomplete="email">
-              </div>
-            </div>
-            <div class="notify-row">
-              <div class="notify-field">
-                <label for="notify-phone">Phone <span class="notify-opt">(optional)</span></label>
-                <input type="tel" id="notify-phone" name="entry.1811252331" autocomplete="tel">
-              </div>
-              <div class="notify-field">
-                <label for="notify-source">How did you hear about us?</label>
-                <select id="notify-source" name="entry.1804236993">
-                  <option value="">— choose one —</option>
-                  <option value="A friend or family member">A friend or family member</option>
-                  <option value="Local facebook group">Local Facebook group</option>
-                  <option value="Instagram">Instagram</option>
-                  <option value="__other_option__">Other</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="notify-submit">Notify me when bookings open</button>
-          </form>
-          <div class="notify-success-msg">
-            <p>You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
-          </div>
+        <div class="mailing-list-block">
+          <p class="mailing-list-intro">Want to hear when bookings open? Add yourself to our mailing list — we'll let you know as each class is released.</p>
+          <a class="mailing-list-btn" href="mailto:lighthousecommunitywellness@gmail.com?subject=Add%20me%20to%20the%20mailing%20list&body=Hi%20Lighthouse%2C%0A%0APlease%20add%20me%20to%20the%20mailing%20list%20so%20I%20know%20when%20bookings%20open%20for%20upcoming%20classes.%0A%0AName%3A%20%0APhone%20(optional)%3A%20%0AHow%20did%20you%20hear%20about%20us%3F%3A%20%0A%0AThanks!">
+            <span>Add me to the mailing list</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <p class="mailing-list-note">Opens your email app — just hit send.</p>
         </div>
       </div>
 
@@ -2474,6 +2578,20 @@
 
 </div>
 
+<!-- ============== STAY IN THE LOOP ============== -->
+<section class="loop-band">
+  <div class="loop-inner">
+    <div class="loop-eyebrow">Stay in the loop</div>
+    <h2 class="loop-title">Be the first to know <em>when bookings open</em>.</h2>
+    <p class="loop-lead">Add yourself to our mailing list and we'll let you know when bookings go live for upcoming classes — usually about two weeks before. No spam, no clutter, just the announcement you need.</p>
+    <a class="loop-btn" href="mailto:lighthousecommunitywellness@gmail.com?subject=Add%20me%20to%20the%20mailing%20list&body=Hi%20Lighthouse%2C%0A%0APlease%20add%20me%20to%20the%20mailing%20list%20so%20I%20know%20when%20bookings%20open%20for%20upcoming%20classes.%0A%0AName%3A%20%0APhone%20(optional)%3A%20%0AHow%20did%20you%20hear%20about%20us%3F%3A%20%0A%0AThanks!">
+      <span>Add me to the mailing list</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+    <p class="loop-note">Opens your email app — just add your name and hit send.</p>
+  </div>
+</section>
+
 <!-- ============== FOOTER ============== -->
 <footer class="footer">
   <div class="footer-inner">
@@ -2788,48 +2906,6 @@
         el.style.display = 'none';
       });
     }
-  })();
-
-  // ============================================================
-  // NOTIFY-ME FORM: Silent submission to Google Forms.
-  // Submits via hidden iframe so visitor stays on the page.
-  // Google receives the data into the linked spreadsheet as normal.
-  // ============================================================
-  (function setupNotifyForm() {
-    const form = document.getElementById('notifyForm');
-    if (!form) return;
-
-    // Create a hidden iframe target so the form submission doesn't navigate away
-    let hiddenFrame = document.getElementById('notify-hidden-frame');
-    if (!hiddenFrame) {
-      hiddenFrame = document.createElement('iframe');
-      hiddenFrame.name = 'notify-hidden-frame';
-      hiddenFrame.id = 'notify-hidden-frame';
-      hiddenFrame.style.display = 'none';
-      document.body.appendChild(hiddenFrame);
-    }
-
-    // Point the form at Google's formResponse endpoint, target the hidden iframe
-    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSegR0PjCmeLh0gjXhtybptA0jORtg1H63ve42l4hKu2_S7bSA/formResponse';
-    form.method = 'POST';
-    form.target = 'notify-hidden-frame';
-
-    form.addEventListener('submit', (e) => {
-      // Show success state immediately. The hidden iframe submission proceeds
-      // in the background — we don't wait for it (Google blocks cross-origin
-      // reads anyway). If Google ever returns an error, the data still saves.
-      const wrap = form.closest('.notify-form-wrap');
-      const submitBtn = form.querySelector('.notify-submit');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
-      }
-      // Let the form actually submit to the hidden iframe (don't preventDefault)
-      // Then flip to success state after a brief moment.
-      setTimeout(() => {
-        wrap.classList.add('is-success');
-      }, 400);
-    });
   })();
 </script>
 
