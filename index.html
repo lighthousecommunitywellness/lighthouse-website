@@ -825,6 +825,135 @@
     font-style: italic;
   }
 
+  /* ===== Mailing-list form (Formspree-powered) ===== */
+  .ml-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .ml-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .ml-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .ml-field label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+  .ml-field input {
+    padding: 0.7rem 0.9rem;
+    background: white;
+    border: 1px solid rgba(138, 158, 138, 0.35);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  .ml-field input:focus {
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 3px rgba(196, 113, 74, 0.1);
+  }
+  .ml-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.6rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    border: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    align-self: flex-start;
+    margin-top: 0.3rem;
+  }
+  .ml-submit:hover:not(:disabled) {
+    background: var(--charcoal);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+  .ml-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .ml-submit-large {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    align-self: center;
+  }
+
+  /* Success state */
+  .ml-success {
+    display: none;
+    padding: 1.2rem 1.4rem;
+    background: rgba(138, 158, 138, 0.12);
+    border-left: 3px solid var(--sage);
+    border-radius: 4px;
+  }
+  .ml-success p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--charcoal);
+    margin: 0;
+  }
+  .mailing-list-block.is-success .ml-form,
+  .mailing-list-block.is-success .mailing-list-intro,
+  .mailing-list-block.is-success .mailing-list-note {
+    display: none;
+  }
+  .mailing-list-block.is-success .ml-success {
+    display: block;
+  }
+
+  /* Loop band success state — centred, with extra polish */
+  .ml-success-loop {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .loop-band.is-success .ml-form,
+  .loop-band.is-success .loop-lead {
+    display: none;
+  }
+  .loop-band.is-success .ml-success-loop {
+    display: block;
+  }
+
+  /* Loop band form — slightly different layout to fit the centred section */
+  .ml-form-loop {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .ml-form-loop .ml-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Stack fields on mobile */
+  @media (max-width: 600px) {
+    .ml-fields {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* ===== Stay in the loop band (above footer) ===== */
   .loop-band {
     background: var(--sage-pale);
@@ -2185,11 +2314,27 @@
         <button class="class-soon" type="button" aria-expanded="false">Bookings open soon</button>
         <div class="mailing-list-block">
           <p class="mailing-list-intro">Want to hear when bookings open? Add yourself to our mailing list — we'll let you know as each class is released.</p>
-          <a class="mailing-list-btn" href="mailto:lighthousecommunitywellness@gmail.com?subject=Add%20me%20to%20the%20mailing%20list&body=Hi%20Lighthouse%2C%0A%0APlease%20add%20me%20to%20the%20mailing%20list%20so%20I%20know%20when%20bookings%20open%20for%20upcoming%20classes.%0A%0AName%3A%20%0APhone%20(optional)%3A%20%0AHow%20did%20you%20hear%20about%20us%3F%3A%20%0A%0AThanks!">
-            <span>Add me to the mailing list</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </a>
-          <p class="mailing-list-note">Opens your email app — just hit send.</p>
+          <form class="ml-form" action="https://formspree.io/f/mgodenzn" method="POST" data-form-id="next-up">
+            <div class="ml-fields">
+              <div class="ml-field">
+                <label for="ml-name-1">Name</label>
+                <input type="text" id="ml-name-1" name="name" required autocomplete="name">
+              </div>
+              <div class="ml-field">
+                <label for="ml-email-1">Email</label>
+                <input type="email" id="ml-email-1" name="email" required autocomplete="email">
+              </div>
+            </div>
+            <input type="hidden" name="_subject" value="New mailing list signup — Lighthouse">
+            <input type="hidden" name="source" value="Next-up class card (13 June)">
+            <button type="submit" class="ml-submit">
+              <span>Add me to the mailing list</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </button>
+          </form>
+          <div class="ml-success">
+            <p>You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
+          </div>
         </div>
       </div>
 
@@ -2584,11 +2729,27 @@
     <div class="loop-eyebrow">Stay in the loop</div>
     <h2 class="loop-title">Be the first to know <em>when bookings open</em>.</h2>
     <p class="loop-lead">Add yourself to our mailing list and we'll let you know when bookings go live for upcoming classes — usually about two weeks before. No spam, no clutter, just the announcement you need.</p>
-    <a class="loop-btn" href="mailto:lighthousecommunitywellness@gmail.com?subject=Add%20me%20to%20the%20mailing%20list&body=Hi%20Lighthouse%2C%0A%0APlease%20add%20me%20to%20the%20mailing%20list%20so%20I%20know%20when%20bookings%20open%20for%20upcoming%20classes.%0A%0AName%3A%20%0APhone%20(optional)%3A%20%0AHow%20did%20you%20hear%20about%20us%3F%3A%20%0A%0AThanks!">
-      <span>Add me to the mailing list</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-    </a>
-    <p class="loop-note">Opens your email app — just add your name and hit send.</p>
+    <form class="ml-form ml-form-loop" action="https://formspree.io/f/mgodenzn" method="POST" data-form-id="loop-band">
+      <div class="ml-fields">
+        <div class="ml-field">
+          <label for="ml-name-2">Name</label>
+          <input type="text" id="ml-name-2" name="name" required autocomplete="name">
+        </div>
+        <div class="ml-field">
+          <label for="ml-email-2">Email</label>
+          <input type="email" id="ml-email-2" name="email" required autocomplete="email">
+        </div>
+      </div>
+      <input type="hidden" name="_subject" value="New mailing list signup — Lighthouse">
+      <input type="hidden" name="source" value="Stay in the loop band">
+      <button type="submit" class="ml-submit ml-submit-large">
+        <span>Add me to the mailing list</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </button>
+    </form>
+    <div class="ml-success ml-success-loop">
+      <p>You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
+    </div>
   </div>
 </section>
 
@@ -2906,6 +3067,55 @@
         el.style.display = 'none';
       });
     }
+  })();
+
+  // ============================================================
+  // MAILING LIST FORMS — Submit to Formspree via fetch API.
+  // Visitor stays on the page; submission lands in Sarah's Gmail.
+  // ============================================================
+  (function setupMailingListForms() {
+    document.querySelectorAll('form.ml-form').forEach(form => {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector('.ml-submit');
+        const originalBtnHTML = submitBtn.innerHTML;
+
+        // Show "sending" state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Sending…</span>';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // Find the right wrapper to flip into success state
+            const block = form.closest('.mailing-list-block, .loop-band');
+            if (block) {
+              block.classList.add('is-success');
+            }
+          } else {
+            // Formspree returned an error (e.g. needs activation, quota, etc.)
+            const data = await response.json().catch(() => ({}));
+            const message = (data.errors && data.errors[0] && data.errors[0].message)
+              ? data.errors[0].message
+              : 'Something went wrong. Please email us directly at lighthousecommunitywellness@gmail.com.';
+            alert(message);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHTML;
+          }
+        } catch (err) {
+          // Network error
+          alert('Could not connect — please check your internet and try again, or email us directly at lighthousecommunitywellness@gmail.com.');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHTML;
+        }
+      });
+    });
   })();
 </script>
 
