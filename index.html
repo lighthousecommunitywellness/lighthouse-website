@@ -675,6 +675,109 @@
     background: rgba(196, 113, 74, 0.06);
   }
 
+  /* ===== Notify-me form (when bookings aren't yet open) ===== */
+  /* The .class-soon pill is now a button that toggles the notify form */
+  button.class-soon {
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s;
+  }
+  button.class-soon:hover {
+    color: var(--terracotta);
+    border-color: rgba(196, 113, 74, 0.5);
+    background: rgba(196, 113, 74, 0.06);
+  }
+  /* The pill is purely informational — no click behaviour, no arrow */
+  button.class-soon:hover {
+    color: var(--terracotta);
+    border-color: rgba(196, 113, 74, 0.4);
+    background: rgba(196, 113, 74, 0.06);
+  }
+
+  .notify-form-wrap {
+    grid-column: 1 / -1;
+    display: none;
+    margin-top: 1.4rem;
+    padding: 1.6rem 1.8rem;
+    background: var(--cream);
+    border-radius: 4px;
+    border: 1px solid rgba(138, 158, 138, 0.22);
+  }
+  .notify-form-wrap.is-open { display: block; }
+
+  .notify-form-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    max-width: 50ch;
+  }
+
+  .notify-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 0.6rem;
+    align-items: stretch;
+  }
+  .notify-form input {
+    padding: 0.7rem 0.9rem;
+    background: white;
+    border: 1px solid rgba(138, 158, 138, 0.35);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .notify-form input:focus {
+    border-color: var(--terracotta);
+  }
+  .notify-form input::placeholder {
+    color: var(--warm-grey);
+    opacity: 0.7;
+  }
+  .notify-form button {
+    padding: 0.7rem 1.2rem;
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .notify-form button:hover {
+    background: var(--terracotta);
+    transform: translateY(-1px);
+  }
+
+  .notify-success {
+    display: none;
+    padding: 0.6rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--sage-deep);
+  }
+  .notify-form-wrap.is-success .notify-form { display: none; }
+  .notify-form-wrap.is-success .notify-success { display: block; }
+  .notify-form-wrap.is-success .notify-form-intro { display: none; }
+
+  @media (max-width: 700px) {
+    .notify-form {
+      grid-template-columns: 1fr;
+    }
+    .notify-form-wrap {
+      padding: 1.2rem 1.2rem;
+    }
+  }
   .schedule-footer {
     margin-top: 3rem;
     padding: 2rem;
@@ -1815,7 +1918,7 @@
         </div>
         <div class="schedule-meta-item">
           <h5>Venue</h5>
-          <p>Sunshine Coast<br><span style="font-size: 0.8rem; opacity: 0.7;">To be confirmed</span></p>
+          <p>Kawana<br>Community Hall</p>
         </div>
         <div class="schedule-meta-item">
           <h5>Cost</h5>
@@ -1824,7 +1927,7 @@
       </div>
 
       <!-- 13 June -->
-      <div class="class-row next-up">
+      <div class="class-row next-up" data-class-iso="2026-06-13" data-class-label="Sat 13 June — Our first class">
         <div class="class-date">
           <div class="class-date-day">Sat</div>
           <div class="class-date-num">13</div>
@@ -1838,11 +1941,22 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <button class="class-book" data-eventbrite data-event-id="1988451114812">Reserve your mat</button>
+        <button class="class-book" data-eventbrite data-event-id="1988451114812" hidden>Reserve your mat</button>
+        <button class="class-soon" type="button" aria-expanded="false">Bookings open soon</button>
+        <div class="notify-form-wrap">
+          <p class="notify-form-intro">Pop your details in and we'll let you know the moment bookings open.</p>
+          <form class="notify-form" data-class-label="Sat 13 June — Our first class">
+            <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+            <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
+            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+            <button type="submit">Notify me</button>
+          </form>
+          <p class="notify-success">You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
+        </div>
       </div>
 
       <!-- 27 June -->
-      <div class="class-row">
+      <div class="class-row" data-class-iso="2026-06-27" data-class-label="Sat 27 June">
         <div class="class-date">
           <div class="class-date-day">Sat</div>
           <div class="class-date-num">27</div>
@@ -1856,14 +1970,15 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <span class="class-soon">Bookings open 20 June</span>
+        <button class="class-book" data-eventbrite data-event-id="" hidden>Reserve your mat</button>
+        <button class="class-soon" type="button">Bookings open soon</button>
       </div>
 
-      <!-- 11 July -->
-      <div class="class-row">
+      <!-- 25 July -->
+      <div class="class-row" data-class-iso="2026-07-25" data-class-label="Sat 25 July">
         <div class="class-date">
           <div class="class-date-day">Sat</div>
-          <div class="class-date-num">11</div>
+          <div class="class-date-num">25</div>
           <div class="class-date-month">July</div>
         </div>
         <div class="class-info">
@@ -1874,7 +1989,8 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <span class="class-soon">Bookings open 4 July</span>
+        <button class="class-book" data-eventbrite data-event-id="" hidden>Reserve your mat</button>
+        <button class="class-soon" type="button">Bookings open soon</button>
       </div>
 
       <div class="schedule-footer">
@@ -1938,7 +2054,7 @@
       <p>NFP doesn't mean unpaid or unprofessional. It means no-one profits from the practice. The teaching is paid. The venue is paid. The administration is done properly. What's removed is the pressure to turn wellbeing into a product — and the barrier that creates for the people who most need support.</p>
 
       <h2>Where we are now</h2>
-      <p>We're early — intentionally. Fortnightly classes to begin with, a Sunshine Coast venue being confirmed, and a small and growing group of regulars. The plan is to grow the way trustworthy things grow: slowly, transparently, and only as the funding and community support allow. Debt-free by principle. Grant-funded where it fits. Donation-sustained at the core.</p>
+      <p>We're early — but committed. Fortnightly Saturday classes are booked through to December 2026 at Kawana Community Hall on the Sunshine Coast, with a small and growing group of regulars. The plan is to grow the way trustworthy things grow: slowly, transparently, and only as the funding and community support allow. Debt-free by principle. Grant-funded where it fits. Donation-sustained at the core.</p>
       <p>If that sounds like something you'd like to be part of — as a participant, a supporter, or someone who simply wants to see more of this kind of thing in the world — there's a mat for you.</p>
 
       <div class="founder-box">
@@ -2465,6 +2581,97 @@
       closeBookingModal();
     }
   });
+
+  // ============================================================
+  // CLASS-STATE LOGIC: Each class auto-decides at page load.
+  // If today is within 14 days of the class date → show "Reserve your mat"
+  // If not → show "Bookings open soon" pill that toggles a notify-me form.
+  // ============================================================
+  (function setupClassWindows() {
+    const BOOKING_WINDOW_DAYS = 14;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // normalise
+
+    const classRows = document.querySelectorAll('.class-row[data-class-iso]');
+
+    classRows.forEach(row => {
+      const isoDate = row.dataset.classIso;
+      const classDate = new Date(isoDate + 'T00:00:00');
+      const opensDate = new Date(classDate);
+      opensDate.setDate(opensDate.getDate() - BOOKING_WINDOW_DAYS);
+
+      const bookBtn = row.querySelector('.class-book');
+      const soonBtn = row.querySelector('.class-soon');
+      const notifyWrap = row.querySelector('.notify-form-wrap');
+
+      const isBookable = today >= opensDate;
+
+      if (isBookable) {
+        // Show book button, hide notify pill + form
+        if (bookBtn) bookBtn.hidden = false;
+        if (soonBtn) soonBtn.hidden = true;
+        if (notifyWrap) notifyWrap.hidden = true;
+      } else {
+        // Show notify pill (with date), hide book button
+        if (bookBtn) bookBtn.hidden = true;
+        if (soonBtn) {
+          soonBtn.hidden = false;
+          // Format the opens date (e.g. "Bookings open Sat 30 May")
+          const formatter = new Intl.DateTimeFormat('en-AU', {
+            weekday: 'short', day: 'numeric', month: 'long'
+          });
+          soonBtn.textContent = 'Bookings open ' + formatter.format(opensDate);
+        }
+        // For the next-up (highlighted) class, auto-expand the notify form
+        // so visitors don't have to discover it.
+        if (row.classList.contains('next-up') && notifyWrap) {
+          notifyWrap.classList.add('is-open');
+          if (soonBtn) soonBtn.setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
+
+    // The notify form is only shown on the next-up class (auto-open).
+    // For other classes, the pill is purely informational — no click behaviour.
+    document.querySelectorAll('button.class-soon').forEach(btn => {
+      btn.style.cursor = 'default';
+    });
+
+    // Handle notify-me form submission
+    // NOTE: Currently shows a friendly success state but does NOT send anywhere.
+    // To capture details for real, wire this to Formspree / Netlify Forms / Mailchimp.
+    // Example with Formspree: change the form's `action` attribute to your Formspree URL
+    // and let the browser submit normally instead of preventDefault here.
+    document.querySelectorAll('form.notify-form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const wrap = form.closest('.notify-form-wrap');
+        const data = {
+          class: form.dataset.classLabel,
+          name: form.querySelector('input[name="name"]').value,
+          phone: form.querySelector('input[name="phone"]').value,
+          email: form.querySelector('input[name="email"]').value
+        };
+        console.log('Notify-me submission:', data); // visible in browser console for testing
+        // TODO: replace with real submission to a form service.
+        wrap.classList.add('is-success');
+      });
+    });
+
+    // Also: hide the nav "Book a class" button when no class is currently bookable,
+    // and hide the hero "Reserve your mat" button + schedule footer link.
+    const anyBookable = Array.from(classRows).some(r => {
+      const iso = r.dataset.classIso;
+      const cd = new Date(iso + 'T00:00:00');
+      const od = new Date(cd); od.setDate(od.getDate() - BOOKING_WINDOW_DAYS);
+      return today >= od;
+    });
+    if (!anyBookable) {
+      document.querySelectorAll('.nav-book, [data-eventbrite].btn-primary, .schedule-footer [data-eventbrite]').forEach(el => {
+        el.style.display = 'none';
+      });
+    }
+  })();
 </script>
 
 </body>
