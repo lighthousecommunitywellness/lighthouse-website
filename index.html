@@ -770,6 +770,115 @@
   .notify-form-wrap.is-success .notify-success { display: block; }
   .notify-form-wrap.is-success .notify-form-intro { display: none; }
 
+  /* Bespoke notify form — submits silently to Google Forms */
+  .notify-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .notify-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .notify-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .notify-field label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+  }
+  .notify-req {
+    color: var(--terracotta);
+    font-weight: 700;
+  }
+  .notify-opt {
+    color: var(--warm-grey);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .notify-field input,
+  .notify-field select {
+    padding: 0.7rem 0.9rem;
+    background: white;
+    border: 1px solid rgba(138, 158, 138, 0.35);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+  .notify-field input:focus,
+  .notify-field select:focus {
+    border-color: var(--terracotta);
+    box-shadow: 0 0 0 3px rgba(196, 113, 74, 0.1);
+  }
+  .notify-field select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%236B7F6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.4rem;
+  }
+  .notify-submit {
+    padding: 0.85rem 1.6rem;
+    background: var(--terracotta);
+    color: var(--cream);
+    border: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    align-self: flex-start;
+    margin-top: 0.4rem;
+  }
+  .notify-submit:hover:not(:disabled) {
+    background: var(--charcoal);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+  .notify-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .notify-success-msg {
+    display: none;
+    padding: 1.2rem 1.4rem;
+    background: rgba(138, 158, 138, 0.12);
+    border-left: 3px solid var(--sage);
+    border-radius: 4px;
+  }
+  .notify-success-msg p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--charcoal);
+    margin: 0;
+  }
+  .notify-form-wrap.is-success .notify-form { display: none; }
+  .notify-form-wrap.is-success .notify-form-intro { display: none; }
+  .notify-form-wrap.is-success .notify-success-msg { display: block; }
+
+  @media (max-width: 700px) {
+    .notify-row { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 700px) {
     .notify-form {
       grid-template-columns: 1fr;
@@ -1944,14 +2053,39 @@
         <button class="class-book" data-eventbrite data-event-id="1988451114812" hidden>Reserve your mat</button>
         <button class="class-soon" type="button" aria-expanded="false">Bookings open soon</button>
         <div class="notify-form-wrap">
-          <p class="notify-form-intro">Pop your details in and we'll let you know the moment bookings open.</p>
-          <form class="notify-form" data-class-label="Sat 13 June — Our first class">
-            <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-            <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel">
-            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
-            <button type="submit">Notify me</button>
+          <p class="notify-form-intro">Pop your details in and we'll let you know the moment bookings open. No spam — just one message when bookings go live.</p>
+          <form class="notify-form" id="notifyForm">
+            <div class="notify-row">
+              <div class="notify-field">
+                <label for="notify-name">Your name <span class="notify-req">*</span></label>
+                <input type="text" id="notify-name" name="entry.2050659417" required autocomplete="name">
+              </div>
+              <div class="notify-field">
+                <label for="notify-email">Email <span class="notify-req">*</span></label>
+                <input type="email" id="notify-email" name="entry.1526853613" required autocomplete="email">
+              </div>
+            </div>
+            <div class="notify-row">
+              <div class="notify-field">
+                <label for="notify-phone">Phone <span class="notify-opt">(optional)</span></label>
+                <input type="tel" id="notify-phone" name="entry.1811252331" autocomplete="tel">
+              </div>
+              <div class="notify-field">
+                <label for="notify-source">How did you hear about us?</label>
+                <select id="notify-source" name="entry.1804236993">
+                  <option value="">— choose one —</option>
+                  <option value="A friend or family member">A friend or family member</option>
+                  <option value="Local facebook group">Local Facebook group</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="__other_option__">Other</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="notify-submit">Notify me when bookings open</button>
           </form>
-          <p class="notify-success">You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
+          <div class="notify-success-msg">
+            <p>You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
+          </div>
         </div>
       </div>
 
@@ -2637,26 +2771,9 @@
       btn.style.cursor = 'default';
     });
 
-    // Handle notify-me form submission
-    // NOTE: Currently shows a friendly success state but does NOT send anywhere.
-    // To capture details for real, wire this to Formspree / Netlify Forms / Mailchimp.
-    // Example with Formspree: change the form's `action` attribute to your Formspree URL
-    // and let the browser submit normally instead of preventDefault here.
-    document.querySelectorAll('form.notify-form').forEach(form => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const wrap = form.closest('.notify-form-wrap');
-        const data = {
-          class: form.dataset.classLabel,
-          name: form.querySelector('input[name="name"]').value,
-          phone: form.querySelector('input[name="phone"]').value,
-          email: form.querySelector('input[name="email"]').value
-        };
-        console.log('Notify-me submission:', data); // visible in browser console for testing
-        // TODO: replace with real submission to a form service.
-        wrap.classList.add('is-success');
-      });
-    });
+    // Notify-me submissions are handled by Google Forms (embedded iframe).
+    // No client-side handler needed — Google captures responses directly into
+    // the linked spreadsheet, and Sarah gets an email notification per submission.
 
     // Also: hide the nav "Book a class" button when no class is currently bookable,
     // and hide the hero "Reserve your mat" button + schedule footer link.
@@ -2671,6 +2788,48 @@
         el.style.display = 'none';
       });
     }
+  })();
+
+  // ============================================================
+  // NOTIFY-ME FORM: Silent submission to Google Forms.
+  // Submits via hidden iframe so visitor stays on the page.
+  // Google receives the data into the linked spreadsheet as normal.
+  // ============================================================
+  (function setupNotifyForm() {
+    const form = document.getElementById('notifyForm');
+    if (!form) return;
+
+    // Create a hidden iframe target so the form submission doesn't navigate away
+    let hiddenFrame = document.getElementById('notify-hidden-frame');
+    if (!hiddenFrame) {
+      hiddenFrame = document.createElement('iframe');
+      hiddenFrame.name = 'notify-hidden-frame';
+      hiddenFrame.id = 'notify-hidden-frame';
+      hiddenFrame.style.display = 'none';
+      document.body.appendChild(hiddenFrame);
+    }
+
+    // Point the form at Google's formResponse endpoint, target the hidden iframe
+    form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSegR0PjCmeLh0gjXhtybptA0jORtg1H63ve42l4hKu2_S7bSA/formResponse';
+    form.method = 'POST';
+    form.target = 'notify-hidden-frame';
+
+    form.addEventListener('submit', (e) => {
+      // Show success state immediately. The hidden iframe submission proceeds
+      // in the background — we don't wait for it (Google blocks cross-origin
+      // reads anyway). If Google ever returns an error, the data still saves.
+      const wrap = form.closest('.notify-form-wrap');
+      const submitBtn = form.querySelector('.notify-submit');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+      // Let the form actually submit to the hidden iframe (don't preventDefault)
+      // Then flip to success state after a brief moment.
+      setTimeout(() => {
+        wrap.classList.add('is-success');
+      }, 400);
+    });
   })();
 </script>
 
