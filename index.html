@@ -675,6 +675,51 @@
     background: rgba(196, 113, 74, 0.06);
   }
 
+  /* ===== Booked-out class (e.g. a past or full class) ===== */
+  .class-row.booked-out {
+    position: relative;
+  }
+
+  .class-row.booked-out .class-date,
+  .class-row.booked-out .class-info,
+  .class-row.booked-out .class-time,
+  .class-row.booked-out .class-full {
+    opacity: 0.4;
+  }
+
+  .class-row.booked-out::after {
+    content: 'BOOKED OUT';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    border: 2px solid var(--terracotta);
+    color: var(--terracotta);
+    background: rgba(250, 247, 242, 0.88);
+    padding: 0.5rem 1.6rem 0.5rem 1.9rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 14px rgba(44, 44, 44, 0.08);
+  }
+
+  .class-full {
+    background: transparent;
+    color: var(--warm-grey);
+    border: 1px solid rgba(138, 158, 138, 0.4);
+    padding: 0.7rem 1.3rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+
   /* ===== Notify-me form (when bookings aren't yet open) ===== */
   /* The .class-soon pill is now a button that toggles the notify form */
   button.class-soon {
@@ -1504,6 +1549,54 @@
 
   .donate-note a { color: var(--terracotta); text-decoration: underline; }
 
+  /* ===== Two giving options: class contribution + donation ===== */
+  .donate-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .donate-option {
+    background: var(--sage-pale);
+    border: 1px solid rgba(138, 158, 138, 0.25);
+    border-radius: 8px;
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .donate-option h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin-bottom: 0.6rem;
+    color: var(--charcoal);
+  }
+
+  .donate-option p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--charcoal);
+    opacity: 0.8;
+    margin-bottom: 1.3rem;
+    flex-grow: 1;
+  }
+
+  .donate-option-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .donate-option:first-child .donate-option-btn {
+    background: var(--sage);
+  }
+
+  .donate-option:first-child .donate-option-btn:hover {
+    background: var(--sage-deep);
+  }
+
   .donate-breakdown {
     background: var(--cream-warm);
     padding: 6rem 2.5rem;
@@ -2083,6 +2176,8 @@
     .class-time { grid-area: time; align-items: flex-start; flex-direction: row; gap: 1rem; align-items: center; }
     .class-book { grid-area: book; width: 100%; }
     .class-soon { grid-area: book; width: 100%; }
+    .class-full { grid-area: book; width: 100%; }
+    .class-row.booked-out::after { font-size: 0.8rem; padding: 0.45rem 1.2rem 0.45rem 1.5rem; }
     .class-date-num { font-size: 1.8rem; }
     .nfp-list { grid-template-columns: 1fr; gap: 1rem; }
     .breakdown-grid { grid-template-columns: 1fr; }
@@ -2090,6 +2185,7 @@
     .support-grid, .meantime-grid { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
     .donate-amounts { grid-template-columns: 1fr; }
+    .donate-options { grid-template-columns: 1fr; }
     .donate-card { padding: 2rem 1.5rem; }
     .schedule-footer { flex-direction: column; align-items: flex-start; }
   }
@@ -2140,7 +2236,7 @@
     <a data-page="about">About</a>
     <a data-scroll="schedule">Classes</a>
     <a data-page="support">Support</a>
-    <a class="nav-book" data-eventbrite data-event-id="1988451114812">Book a class</a>
+    <a class="nav-book" data-eventbrite data-event-id="1991431461108">Book a class</a>
     <a class="nav-cta" data-page="donate">Donate</a>
   </div>
 </nav>
@@ -2156,7 +2252,7 @@
         <h1 class="hero-headline">A steady light, <em>a soft landing.</em></h1>
         <p class="hero-sub">Lighthouse Community Wellness is a donation-based yoga and mindfulness initiative built to remove cost, intimidation, and gatekeeping from mental-health support. Fortnightly community classes. Pay what you can. Everyone welcome.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary" data-eventbrite data-event-id="1988451114812">Reserve your mat — 13 June</a>
+          <a class="btn btn-primary" data-eventbrite data-event-id="1991431461108">Reserve your mat — 27 June</a>
           <a class="btn btn-secondary" data-scroll="schedule">See upcoming classes</a>
         </div>
       </div>
@@ -2221,8 +2317,8 @@
         </div>
       </div>
 
-      <!-- 13 June -->
-      <div class="class-row next-up" data-class-iso="2026-06-13" data-class-label="Sat 13 June — Our first class" data-bookings-open="true">
+      <!-- 13 June — booked out -->
+      <div class="class-row booked-out" data-class-label="Sat 13 June — Our first class">
         <div class="class-date">
           <div class="class-date-day">Sat</div>
           <div class="class-date-num">13</div>
@@ -2236,47 +2332,25 @@
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <button class="class-book" data-eventbrite data-event-id="1988451114812" hidden>Reserve your mat</button>
-        <button class="class-soon" type="button" aria-expanded="false">Bookings open soon</button>
-        <div class="mailing-list-block">
-          <p class="mailing-list-intro">Want to hear when bookings open? Add yourself to our mailing list — we'll let you know as each class is released.</p>
-          <form class="ml-form" action="https://formspree.io/f/mgodenzn" method="POST" data-form-id="next-up">
-            <div class="ml-fields">
-              <div class="ml-field">
-                <label for="ml-name-1">Name</label>
-                <input type="text" id="ml-name-1" name="name" required autocomplete="name">
-              </div>
-              <div class="ml-field">
-                <label for="ml-email-1">Email</label>
-                <input type="email" id="ml-email-1" name="email" required autocomplete="email">
-              </div>
-            </div>
-            <input type="hidden" name="_subject" value="New mailing list signup — Lighthouse">
-            <input type="hidden" name="source" value="Next-up class card (13 June)">
-            <button type="submit" class="ml-submit">
-              <span>Add me to the mailing list</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </button>
-          </form>
-          <div class="ml-success">
-            <p>You're on the list — we'll be in touch the moment bookings open. Thank you.</p>
-          </div>
-        </div>
+        <span class="class-full">Full — join us 27 June</span>
       </div>
 
       <!-- 27 June -->
-      <div class="class-row" data-class-iso="2026-06-27" data-class-label="Sat 27 June">
+      <div class="class-row next-up" data-class-iso="2026-06-27" data-class-label="Sat 27 June" data-bookings-open="true">
         <div class="class-date">
           <div class="class-date-day">Sat</div>
           <div class="class-date-num">27</div>
           <div class="class-date-month">June</div>
         </div>
-        <div class="class-info"></div>
+        <div class="class-info">
+          <h4>Community yin — slow down, settle in</h4>
+          <p>Back on the mat at Kawana. A gentle, floor-based yin practice open to everyone — no experience needed. Long, supported holds, quiet breath, and a short guided meditation to close. Arrive 10 minutes early, bring your own mat, water, and a warm layer for the longer holds.</p>
+        </div>
         <div class="class-time">
           <span class="class-time-hour">4:00pm</span>
           <span class="class-time-note">60 min</span>
         </div>
-        <button class="class-book" data-eventbrite data-event-id="" hidden>Reserve your mat</button>
+        <button class="class-book" data-eventbrite data-event-id="1991431461108" hidden>Reserve your mat</button>
         <button class="class-soon" type="button">Bookings open soon</button>
       </div>
 
@@ -2314,7 +2388,7 @@
 
       <div class="schedule-footer">
         <p><strong>First time?</strong> Arrive 10 minutes early. Bring your own mat, a water bottle, and warm layers — and if you'd like, a small blanket to wrap up in. Yin gets cool (the body settles, body temperature drops, and you'll want to be cosy for the longer holds). Wear something soft you can move in. We'll take care of the rest.</p>
-        <a class="btn btn-secondary" data-eventbrite data-event-id="1988451114812">Reserve your mat — 13 June</a>
+        <a class="btn btn-secondary" data-eventbrite data-event-id="1991431461108">Reserve your mat — 27 June</a>
       </div>
     </div>
   </section>
@@ -2463,21 +2537,34 @@
 <!-- ============== DONATE PAGE ============== -->
 <div class="page" id="page-donate">
 
-  <!-- Donate hero — coming soon -->
+  <!-- Donate hero — live (Stripe Payment Link) -->
   <section class="donate-hero">
     <div class="donate-inner">
       <div class="section-eyebrow">Support the work</div>
       <h1 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.8rem);">Donations</h1>
-      <p class="section-lead" style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--charcoal); opacity: 0.9; line-height: 1.3; margin-top: 1rem; max-width: 720px;">Coming <em style="color: var(--terracotta);">soon</em>.</p>
+      <p class="section-lead" style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--charcoal); opacity: 0.9; line-height: 1.3; margin-top: 1rem; max-width: 720px;">Every dollar keeps the <em style="color: var(--terracotta);">light</em> on.</p>
 
       <div class="donate-card" style="text-align: left;">
         <p style="font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-deep); margin-bottom: 1.5rem;">A note from us</p>
 
-        <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; line-height: 1.5; color: var(--charcoal); margin-bottom: 1.5rem;">We're not quite ready to accept donations yet — but we're getting there.</p>
+        <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; line-height: 1.5; color: var(--charcoal); margin-bottom: 1.5rem;">Donations are open — and every single one goes straight into the work.</p>
 
-        <p style="font-size: 1rem; line-height: 1.7; color: var(--charcoal); margin-bottom: 1.2rem;">Lighthouse Community Wellness is in the final stages of becoming a registered not-for-profit. Once we're set up, we'll open donations properly — through a secure platform, with proper receipts, and (eventually) tax deductibility.</p>
+        <p style="font-size: 1rem; line-height: 1.7; color: var(--charcoal); margin-bottom: 1.8rem;">You can give securely online in any amount, big or small. Payments are processed by Stripe, so your card details never touch our systems. We're a registered not-for-profit association, and our charity registration with the ACNC is underway — donations aren't tax-deductible just yet, but we'll let you know the moment that changes.</p>
 
-        <p style="font-size: 1rem; line-height: 1.7; color: var(--charcoal); margin-bottom: 1.2rem;">In the meantime, every donation we receive will go directly into making this work. There's no marketing budget, no boutique fit-out, no overhead bloat — just the real, ordinary, essential things that keep a community wellness programme running:</p>
+        <div class="donate-options">
+          <div class="donate-option">
+            <h4>Class contribution</h4>
+            <p>Been to a class? This is the pay-what-you-can contribution — whatever feels right for you. There's no set amount, and nothing is too small.</p>
+            <a href="https://buy.stripe.com/6oU9ATdgM17DffD8SX1oI00" target="_blank" rel="noopener" class="donate-submit donate-option-btn">Contribute for a class</a>
+          </div>
+          <div class="donate-option">
+            <h4>Make a donation</h4>
+            <p>A one-off gift to support the work itself — venue hire, teachers, insurance, mats and props. Every dollar goes straight back into classes.</p>
+            <a href="https://buy.stripe.com/5kQ5kD90w03zd7v1qv1oI01" target="_blank" rel="noopener" class="donate-submit donate-option-btn">Donate now</a>
+          </div>
+        </div>
+
+        <p style="font-size: 1rem; line-height: 1.7; color: var(--charcoal); margin-bottom: 1.2rem;">There's no marketing budget, no boutique fit-out, no overhead bloat — just the real, ordinary, essential things that keep a community wellness programme running:</p>
 
         <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem 0; display: flex; flex-direction: column; gap: 0.8rem;">
           <li style="display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.98rem; line-height: 1.6; color: var(--charcoal);">
@@ -2505,7 +2592,7 @@
         <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; line-height: 1.55; color: var(--charcoal); padding-top: 1.5rem; border-top: 1px solid rgba(138, 158, 138, 0.2); margin-bottom: 0;">No-one will be turned away from a class because of cost. That's the whole point — and it's only possible because of the people who choose to give what they can. Every contribution, big or small, will be held with care and put to work. Thank you.</p>
       </div>
 
-      <p class="donate-note" style="margin-top: 2rem; text-align: center;">Want to know when donations open? Add yourself to our <a href="#schedule" data-page="home" style="color: var(--terracotta-deep); text-decoration: underline;">mailing list</a> — we'll let you know.</p>
+      <p class="donate-note" style="margin-top: 2rem; text-align: center;">Donations are processed securely by Stripe and go to Lighthouse Community Wellness Inc. Questions? Email us at <a href="mailto:lighthousecommunitywellness@gmail.com">lighthousecommunitywellness@gmail.com</a>.</p>
     </div>
   </section>
 
@@ -2927,7 +3014,8 @@
   });
 
   // ============== DONATION ==============
-  // Donate page is now a "coming soon" message — no interactive elements to wire up.
+  // Donations are live via a Stripe Payment Link (plain <a> on the Donate
+  // page — no JS needed). Swap the href for GiveNow post-ACNC registration.
 
   // close modal on escape
   document.addEventListener('keydown', (e) => {
